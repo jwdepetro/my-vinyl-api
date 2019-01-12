@@ -65,5 +65,3 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'will_paginate', '~> 3.1.0'
 
 gem "pg", "~> 1.1"
-
-gem 'swagger-docs'
