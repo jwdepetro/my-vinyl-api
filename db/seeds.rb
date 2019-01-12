@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+500.times do
+    record = Record.create(artist: Faker::Music.band, album: Faker::Music.album, year_released: Faker::Number.between(1960, 2000), year_printed: Faker::Number.between(2000, 2018), condition: Faker::Number.between(1, 10), created_by: User.first.id)
+    i = 0
+    Faker::Number.between(6, 20).times do
+        i += 1
+        record.tracks.create(name: Faker::Lorem.sentence, number: i, duration: Faker::Number.between(120, 360))
+    end
+end
