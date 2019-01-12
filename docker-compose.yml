@@ -1,0 +1,41 @@
+version: '3'
+services:
+  db:
+    image: "postgres:11-alpine"
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+    env_file:
+      - .env
+    networks: 
+      - db_nw
+  app:
+    build: .
+    image: "jwdepetro/my-vinyl-api"
+    volumes:
+      - ./:/app
+    networks:
+      - db_nw
+      - web_nw
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+  web:
+    image: "nginx:1-alpine"
+    ports:
+      - "8080:80"
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+    networks: 
+      - web_nw
+    depends_on:
+      - app
+networks:
+  db_nw:
+    driver: bridge
+  web_nw:
+    driver: bridge
+volumes:
+  dbdata:

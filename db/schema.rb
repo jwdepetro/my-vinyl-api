@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2019_01_12_021549) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "records", force: :cascade do |t|
     t.string "artist"
     t.string "album"
@@ -27,7 +30,7 @@ ActiveRecord::Schema.define(version: 2019_01_12_021549) do
     t.string "name"
     t.integer "number"
     t.integer "duration"
-    t.integer "record_id"
+    t.bigint "record_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["record_id"], name: "index_tracks_on_record_id"
@@ -41,4 +44,5 @@ ActiveRecord::Schema.define(version: 2019_01_12_021549) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "tracks", "records"
 end
