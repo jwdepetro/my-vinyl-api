@@ -17,7 +17,12 @@ describe 'Users API' do
             }
 
             response '201', 'User created' do 
-                let(:user) {{message: 'Account created successfully', auth_token: '123'}}
+                let(:user) {{name: Faker::Name.name, email: Faker::Internet.email, password: 'password', password_confirmation: 'password'}}
+                run_test!
+            end
+
+            response '422', 'Invalid request' do 
+                let(:user) {{}}
                 run_test!
             end
         end
