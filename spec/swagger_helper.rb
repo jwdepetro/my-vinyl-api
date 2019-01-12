@@ -15,9 +15,14 @@ RSpec.configure do |config|
   config.swagger_docs = {
     'swagger.json' => {
       swagger: '2.0',
+      host: ENV.fetch('HOST'),
       info: {
-        title: 'API V1',
-        version: 'v1'
+        title: 'My Vinyl API',
+        version: 'v1',
+        description: 'This is the API component for a simple application that can manage a user\'s record collection.',
+        contact: {
+          email: 'jwdepetro@gmail.com'
+        }
       },
       securityDefinitions: {
         apiKey: {
@@ -25,6 +30,10 @@ RSpec.configure do |config|
           name: 'api_key',
           in: :header
         }
+      },
+      externalDocs: {
+        description: 'GitHub',
+        url: 'https://github.com/jwdepetro/my-vinyl-api'
       }
     }
   }
