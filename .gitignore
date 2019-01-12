@@ -27,3 +27,6 @@
 /config/master.key
 
 .env
+
+# Ignore generated swagger docs
+public/api-docs
