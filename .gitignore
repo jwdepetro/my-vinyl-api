@@ -28,9 +28,6 @@
 
 .env
 
-# Ignore generated swagger docs
-public/api-docs
-
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml

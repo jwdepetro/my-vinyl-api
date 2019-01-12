@@ -1,0 +1,562 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "My Vinyl API",
+    "version": "v1",
+    "description": "This is the API component for a simple application that can manage a user's record collection.",
+    "contact": {
+      "email": "jwdepetro@gmail.com"
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "externalDocs": {
+    "description": "GitHub",
+    "url": "https://github.com/jwdepetro/my-vinyl-api"
+  },
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "Login",
+        "tags": [
+          "Auth"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful login"
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        }
+      }
+    },
+    "/records": {
+      "get": {
+        "summary": "Gets all user records",
+        "tags": [
+          "Records"
+        ],
+        "security": [
+          {
+            "apiKey": [
+
+            ]
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "User records"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a record",
+        "tags": [
+          "Records"
+        ],
+        "security": [
+          {
+            "apiKey": [
+
+            ]
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "record",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "artist": {
+                  "type": "string",
+                  "example": "The La's"
+                },
+                "album": {
+                  "type": "string",
+                  "example": "I Dreamed a Dream"
+                },
+                "year_released": {
+                  "type": "integer",
+                  "example": 1987
+                },
+                "year_printed": {
+                  "type": "integer",
+                  "example": 2002
+                },
+                "condition": {
+                  "type": "integer",
+                  "example": 9
+                }
+              },
+              "required": [
+                "artist",
+                "album",
+                "year_released",
+                "year_printed",
+                "condition"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Record created"
+          },
+          "422": {
+            "description": "Invalid request"
+          }
+        }
+      }
+    },
+    "/records/{id}": {
+      "get": {
+        "summary": "Gets a record",
+        "tags": [
+          "Records"
+        ],
+        "security": [
+          {
+            "apiKey": [
+
+            ]
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Record"
+          },
+          "404": {
+            "description": "Record not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates a record",
+        "tags": [
+          "Records"
+        ],
+        "security": [
+          {
+            "apiKey": [
+
+            ]
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "record",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "artist": {
+                  "type": "string",
+                  "example": "Bauhaus"
+                },
+                "album": {
+                  "type": "string",
+                  "example": "Backstreet Boys"
+                },
+                "year_released": {
+                  "type": "integer",
+                  "example": 1985
+                },
+                "year_printed": {
+                  "type": "integer",
+                  "example": 2009
+                },
+                "condition": {
+                  "type": "integer",
+                  "example": 9
+                }
+              },
+              "required": [
+                "artist",
+                "album",
+                "year_released",
+                "year_printed",
+                "condition"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Record updated"
+          },
+          "422": {
+            "description": "Invalid request"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a record",
+        "tags": [
+          "Records"
+        ],
+        "security": [
+          {
+            "apiKey": [
+
+            ]
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Record deleted"
+          },
+          "404": {
+            "description": "Record not found"
+          }
+        }
+      }
+    },
+    "/records/{record_id}/tracks": {
+      "get": {
+        "summary": "Get all record tracks",
+        "tags": [
+          "Tracks"
+        ],
+        "security": [
+          {
+            "apiKey": [
+
+            ]
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "record_id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Track"
+          },
+          "404": {
+            "description": "Record not found"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a track",
+        "tags": [
+          "Tracks"
+        ],
+        "security": [
+          {
+            "apiKey": [
+
+            ]
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "record_id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "track",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Animi laudantium tenetur doloribus."
+                },
+                "number": {
+                  "type": "integer",
+                  "example": 7
+                },
+                "duration": {
+                  "type": "integer",
+                  "example": 343
+                }
+              },
+              "required": [
+                "name",
+                "number",
+                "duration"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Track created"
+          },
+          "422": {
+            "description": "Invalid request"
+          }
+        }
+      }
+    },
+    "/records/{record_id}/tracks/{id}": {
+      "get": {
+        "summary": "Gets a track",
+        "tags": [
+          "Tracks"
+        ],
+        "security": [
+          {
+            "apiKey": [
+
+            ]
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "record_id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Track"
+          },
+          "404": {
+            "description": "Track not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates a track",
+        "tags": [
+          "Tracks"
+        ],
+        "security": [
+          {
+            "apiKey": [
+
+            ]
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "record_id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "track",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Et quia quod dolore."
+                },
+                "number": {
+                  "type": "integer",
+                  "example": 20
+                },
+                "duration": {
+                  "type": "integer",
+                  "example": 329
+                }
+              },
+              "required": [
+                "name",
+                "number",
+                "duration"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Track updated"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a track",
+        "tags": [
+          "Tracks"
+        ],
+        "security": [
+          {
+            "apiKey": [
+
+            ]
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "record_id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Track deleted"
+          },
+          "404": {
+            "description": "Track not found"
+          }
+        }
+      }
+    },
+    "/signup": {
+      "post": {
+        "summary": "Creates a user",
+        "tags": [
+          "Users"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "password_confirmation": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "email",
+                "password",
+                "password_confirmation"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User created"
+          },
+          "422": {
+            "description": "Invalid request"
+          }
+        }
+      }
+    }
+  }
+}

@@ -30,3 +30,9 @@ $ docker-compose up
 ```
 
 Navigate to `http://localhost:8080` and see your API working!
+
+## Documentation
+
+Documentation is done through [rswag](https://github.com/domaindrivendev/rswag)
+
+To generate Swagger docs run `$ rake rswag:specs:swaggerize`

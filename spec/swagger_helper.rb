@@ -15,7 +15,6 @@ RSpec.configure do |config|
   config.swagger_docs = {
     'swagger.json' => {
       swagger: '2.0',
-      host: ENV.fetch('HOST'),
       info: {
         title: 'My Vinyl API',
         version: 'v1',
