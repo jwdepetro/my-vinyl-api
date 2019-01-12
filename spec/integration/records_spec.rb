@@ -8,6 +8,15 @@ describe 'Records API' do
     let!(:record) {create(:record, created_by: user.id)}
 
     path '/records' do 
+        get 'Gets all user records' do 
+            tags 'Records'
+            security [apiKey: []]
+            consumes 'application/json'
+
+            response '200', 'User records' do 
+                run_test!
+            end
+        end
         post 'Creates a record' do 
             tags 'Records'
             security [apiKey: []]

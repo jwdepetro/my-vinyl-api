@@ -11,6 +11,22 @@ describe 'Tracks API' do
     let!(:tracks) {create_list(:track, 20, record_id: record.id)}
 
     path '/records/{record_id}/tracks' do 
+        get 'Get all record tracks' do 
+            tags 'Tracks'
+            security [apiKey: []]
+            consumes 'application/json'
+            parameter name: :record_id, :in => :path, :type => :string
+
+            response '200', 'Track' do 
+                let(:record_id) {record.id}
+                run_test!
+            end
+
+            response '404', 'Record not found' do 
+                let(:record_id) {0}
+                run_test!
+            end
+        end
         post 'Creates a track' do 
             tags 'Tracks'
             security [apiKey: []]
