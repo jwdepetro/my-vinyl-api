@@ -4,7 +4,7 @@ module V1
 
         # GET /records
         def index
-            @records = current_user.records
+            @records = current_user.records.paginate(page: params[:page], per_page: 20)
             json_response(@records)
         end
 
