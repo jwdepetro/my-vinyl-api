@@ -12,6 +12,10 @@ This application has been built off of the following technologies.
 
 - [Docker](https://www.docker.com/) for deployment.
 
+- [PostgreSQL](https://www.postgresql.org/) as the database.
+
+- [Nginx](https://www.nginx.com/) as a reverse proxy web server.
+
 - [AWS](https://aws.amazon.com/) for hosting.
 
 ## Development Dependencies
