@@ -3,5 +3,5 @@ class Record < ApplicationRecord
     has_many :tracks, dependent: :destroy
     
     # Required fields
-    validates_presence_of :artist, :album, :year_released, :year_printed, :condition, :created_by
+    validates_presence_of :artist, :album, :year_released, :year_printed, :condition
 end
