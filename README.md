@@ -1,24 +1,13 @@
-# README
+# My Vinyl API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the API component for a simple application that can manage a user's record collection.
 
-Things you may want to cover:
+## (Live Demo)[http://my-vinyl-api-prod.us-east-2.elasticbeanstalk.com]
 
-* Ruby version
+This application has been built off of the following technologies.
 
-* System dependencies
+- (Rails)[https://rubyonrails.org/] as the application framework.
 
-* Configuration
+- (RSpec)[http://rspec.info/] for testing.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- (Docker)[https://www.docker.com/] for deployment.
