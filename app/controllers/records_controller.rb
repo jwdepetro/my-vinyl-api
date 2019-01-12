@@ -3,13 +3,13 @@ class RecordsController < ApplicationController
 
     # GET /records
     def index
-        @records = Record.all 
+        @records = current_user.records
         json_response(@records)
     end
 
     # POST /records
     def create 
-        @record = Record.create!(record_params)
+        @record = current_user.records.create!(record_params)
         json_response(@record, :created)
     end
 
@@ -34,7 +34,7 @@ class RecordsController < ApplicationController
 
     def record_params
         # Whitelisted params
-        params.permit(:artist, :album, :year_released, :year_printed, :condition, :created_by)
+        params.permit(:artist, :album, :year_released, :year_printed, :condition)
     end
 
     def set_record

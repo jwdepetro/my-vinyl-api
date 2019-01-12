@@ -1,14 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe 'Records API', type: :request do
-    # Create the test data
-    let!(:records) {create_list(:record, 10)}
+    # Create a user
+    let(:user) {create(:user)}
+
+    # Create the records
+    let!(:records) {create_list(:record, 10, created_by: user.id)}
+
+    # Set the record ID
     let(:record_id) {records.first.id}
+
+    # Create the headers
+    let(:headers) {valid_headers}
 
     # Test suite for GET /records
     describe 'GET /records' do
         # Make HTTP get request before each example
-        before {get '/records'}
+        before {get '/records', params: {}, headers: headers}
 
         it 'returns records' do
             # `json` is a custom helper to parse JSON requests
@@ -24,7 +32,7 @@ RSpec.describe 'Records API', type: :request do
     # Test suite for GET /records/:id
     describe 'GET /records/:id' do 
         # Make HTTP get record request before
-        before {get "/records/#{record_id}"}
+        before {get "/records/#{record_id}", params: {}, headers: headers}
 
         context 'when the record exists' do 
             it 'returns the record' do 
@@ -53,11 +61,11 @@ RSpec.describe 'Records API', type: :request do
     # Test suite for POST /records
     describe 'POST /records' do 
         # Create a valid payload
-        let(:valid_payload) {{artist: 'Motley Crue', album: 'Dr. Feelgood', year_released: 1989, year_printed: 1991, condition: 7, created_by: '1'}}
+        let(:valid_payload) {{artist: 'Motley Crue', album: 'Dr. Feelgood', year_released: 1989, year_printed: 1991, condition: 7}}
 
         context 'when the request is valid' do
             # Create the record
-            before {post '/records', params: valid_payload}
+            before {post '/records', params: valid_payload, headers: headers}
 
             it 'creates a todo' do 
                 expect(json['artist']).to eq('Motley Crue')
@@ -73,7 +81,7 @@ RSpec.describe 'Records API', type: :request do
         end
 
         context 'when the request is invalid' do 
-            before {post '/records', params: {artist: 'Motley Crue', year_released: 1989, year_printed: 1991, condition: 7, created_by: '1'}}
+            before {post '/records', params: {artist: 'Motley Crue', year_released: 1989, year_printed: 1991, condition: 7}, headers: headers}
 
             it 'returns status code 422' do 
                 expect(response).to have_http_status(422)
@@ -88,11 +96,11 @@ RSpec.describe 'Records API', type: :request do
     # Test suite for PUT /records/:id
     describe 'PUT /todos/:id' do 
         # Create a valid payload
-        let(:valid_payload) {{artist: 'Motley Crue', album: 'Girls Girls Girls', year_released: 1987, year_printed: 1988, condition: 5, created_by: '1'}}
+        let(:valid_payload) {{artist: 'Motley Crue', album: 'Girls Girls Girls', year_released: 1987, year_printed: 1988, condition: 5}}
 
         context 'when the record exists' do 
             # Update the record
-            before {put "/records/#{record_id}", params: valid_payload}
+            before {put "/records/#{record_id}", params: valid_payload, headers: headers}
 
             it 'updates the record' do 
                 expect(response.body).to be_empty
@@ -106,7 +114,7 @@ RSpec.describe 'Records API', type: :request do
 
     # Test suite for DELETE /records/:id
     describe 'DELETE /todos/:id' do 
-        before {delete "/records/#{record_id}"}
+        before {delete "/records/#{record_id}", params: {}, headers: headers}
 
         it 'returns status code 204' do 
             expect(response).to have_http_status(204)

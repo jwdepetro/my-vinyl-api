@@ -1,15 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe 'Tracks API' do 
-    # Create the test data
-    let!(:record) {create(:record)}
+    # Create a user
+    let(:user) {create(:user)}
+
+    # Create the record
+    let!(:record) {create(:record, created_by: user.id)}
+
+    # Create the tracks
     let!(:tracks) {create_list(:track, 20, record_id: record.id)}
+
+    # Set the record ID
     let(:record_id) {record.id}
+
+    # Set the track ID
     let(:id) {tracks.first.id}
+
+    # Create the headers
+    let(:headers) {valid_headers}
 
     # Test suite for GET /records/:id/tracks
     describe 'GET /records/:id/tracks' do 
-        before {get "/records/#{record_id}/tracks"}
+        before {get "/records/#{record_id}/tracks", params: {}, headers: headers}
 
         context 'when tracks exists' do 
             it 'returns status code 200' do 
@@ -36,7 +48,7 @@ RSpec.describe 'Tracks API' do
 
     # Test suite for GET /records/:id/tracks/:id
     describe 'GET /records/:id/tracks/:id' do 
-        before {get "/records/#{record_id}/tracks/#{id}"}
+        before {get "/records/#{record_id}/tracks/#{id}", params: {}, headers: headers}
 
         context 'when track exists' do 
             it 'returns status code 200' do 
@@ -66,7 +78,7 @@ RSpec.describe 'Tracks API' do
         let(:valid_payload) {{name: 'Kickstart My Heart', number: 1, duration: 300}}
 
         context 'when the request is valid' do 
-            before {post "/records/#{record_id}/tracks", params: valid_payload}
+            before {post "/records/#{record_id}/tracks", params: valid_payload, headers: headers}
 
             it 'returns status code 201' do 
                 expect(response).to have_http_status(201)
@@ -74,7 +86,7 @@ RSpec.describe 'Tracks API' do
         end
 
         context 'when the request is invalid' do 
-            before {post "/records/#{record_id}/tracks", params: {}}
+            before {post "/records/#{record_id}/tracks", params: {}, headers: headers}
 
             it 'returns status code 422' do 
                 expect(response).to have_http_status(422)
@@ -90,7 +102,7 @@ RSpec.describe 'Tracks API' do
     describe 'PUT /records/:id/tracks/:id' do 
         let(:valid_payload) {{name: 'Wild Side', number: 6, duration: 320}}
 
-        before {put "/records/#{record_id}/tracks/#{id}", params: valid_payload}
+        before {put "/records/#{record_id}/tracks/#{id}", params: valid_payload, headers: headers}
 
         context 'when the track exists' do 
             it 'returns status code 204' do 
@@ -118,7 +130,7 @@ RSpec.describe 'Tracks API' do
 
     # Test suite for DELETE /records/:id/tracks/:id
     describe 'DELETE /records/:id/tracks/:id' do 
-        before {delete "/records/#{record_id}/tracks/#{id}"}
+        before {delete "/records/#{record_id}/tracks/#{id}", params: {}, headers: headers}
 
         it 'returns a status code 204' do 
             expect(response).to have_http_status(204)
