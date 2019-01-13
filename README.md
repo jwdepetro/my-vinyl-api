@@ -2,7 +2,7 @@
 
 This is the API component for a simple application that can manage a user's record collection.
 
-## [Live Demo](http://api.myvinyl.rocks/api-docs)
+## [Live Demo](https://api.myvinyl.rocks/api-docs)
 
 This application has been built off of the following technologies.
 
