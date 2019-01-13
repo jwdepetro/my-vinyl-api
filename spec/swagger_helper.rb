@@ -26,7 +26,7 @@ RSpec.configure do |config|
       securityDefinitions: {
         apiKey: {
           type: :apiKey,
-          name: 'api_key',
+          name: 'Authorization',
           in: :header
         }
       },

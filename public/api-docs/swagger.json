@@ -11,7 +11,7 @@
   "securityDefinitions": {
     "apiKey": {
       "type": "apiKey",
-      "name": "api_key",
+      "name": "Authorization",
       "in": "header"
     }
   },
@@ -106,23 +106,23 @@
               "properties": {
                 "artist": {
                   "type": "string",
-                  "example": "The La's"
+                  "example": "The Cranberries"
                 },
                 "album": {
                   "type": "string",
-                  "example": "I Dreamed a Dream"
+                  "example": "Recovery"
                 },
                 "year_released": {
                   "type": "integer",
-                  "example": 1987
+                  "example": 1965
                 },
                 "year_printed": {
                   "type": "integer",
-                  "example": 2002
+                  "example": 2017
                 },
                 "condition": {
                   "type": "integer",
-                  "example": 9
+                  "example": 8
                 }
               },
               "required": [
@@ -208,23 +208,23 @@
               "properties": {
                 "artist": {
                   "type": "string",
-                  "example": "Bauhaus"
+                  "example": "Siouxsie and The Banshees"
                 },
                 "album": {
                   "type": "string",
-                  "example": "Backstreet Boys"
+                  "example": "Cross Road"
                 },
                 "year_released": {
                   "type": "integer",
-                  "example": 1985
+                  "example": 1989
                 },
                 "year_printed": {
                   "type": "integer",
-                  "example": 2009
+                  "example": 2004
                 },
                 "condition": {
                   "type": "integer",
-                  "example": 9
+                  "example": 4
                 }
               },
               "required": [
@@ -342,15 +342,15 @@
               "properties": {
                 "name": {
                   "type": "string",
-                  "example": "Animi laudantium tenetur doloribus."
+                  "example": "Repellat nihil aspernatur repellendus."
                 },
                 "number": {
                   "type": "integer",
-                  "example": 7
+                  "example": 3
                 },
                 "duration": {
                   "type": "integer",
-                  "example": 343
+                  "example": 286
                 }
               },
               "required": [
@@ -446,15 +446,15 @@
               "properties": {
                 "name": {
                   "type": "string",
-                  "example": "Et quia quod dolore."
+                  "example": "Voluptas dignissimos aliquam quis."
                 },
                 "number": {
                   "type": "integer",
-                  "example": 20
+                  "example": 2
                 },
                 "duration": {
                   "type": "integer",
-                  "example": 329
+                  "example": 252
                 }
               },
               "required": [
