@@ -4,8 +4,8 @@ describe 'Records API' do
     # Create a user
     let(:user) {create(:user)}
 
-    # Create the record
-    let!(:record) {create(:record, created_by: user.id)}
+    # Create the Authorization header
+    let(:Authorization) {"Bearer #{token_generator(user.id)}"}
 
     path '/records' do 
         get 'Gets all user records' do 
@@ -53,7 +53,7 @@ describe 'Records API' do
             parameter name: :id, :in => :path, :type => :string
 
             response '200', 'Record' do 
-                let(:id) {record.id}
+                let(:id) {create(:record, created_by: user.id).id}
                 run_test!
             end
 
@@ -80,12 +80,14 @@ describe 'Records API' do
             }
 
             response '204', 'Record updated' do 
+                let(:id) {create(:record, created_by: user.id).id}
                 let(:record) {build(:record)}
                 run_test!
             end
 
             response '422', 'Invalid request' do 
-                let(:record) {{}}
+                let(:id) {create(:record, created_by: user.id).id}
+                let(:record) {{'year_released': 5555}}
                 run_test!
             end
         end
@@ -96,7 +98,7 @@ describe 'Records API' do
             parameter name: :id, :in => :path, :type => :string
 
             response '204', 'Record deleted' do 
-                let(:id) {record.id}
+                let(:id) {create(:record, created_by: user.id).id}
                 run_test!
             end
 
