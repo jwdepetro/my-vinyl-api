@@ -7,5 +7,4 @@ RSpec.describe Record, type: :model do
   it {should validate_presence_of(:year_released)}
   it {should validate_presence_of(:year_printed)}
   it {should validate_presence_of(:condition)}
-  it {should validate_presence_of(:created_by)}
 end
