@@ -10,6 +10,9 @@ describe 'Tracks API' do
     # Create the tracks
     let!(:tracks) {create_list(:track, 20, record_id: record.id)}
 
+    # Create the Authorization header
+    let(:Authorization) {"Bearer #{token_generator(user.id)}"}
+
     path '/records/{record_id}/tracks' do 
         get 'Get all record tracks' do 
             tags 'Tracks'
@@ -43,11 +46,13 @@ describe 'Tracks API' do
             }
 
             response '201', 'Track created' do 
+                let(:record_id) {create(:record, created_by: user.id).id}
                 let(:track) {create(:track, record_id: record.id)}
                 run_test!
             end
 
             response '422', 'Invalid request' do 
+                let(:record_id) {create(:record, created_by: user.id).id}
                 let(:track) {{}}
                 run_test!
             end
