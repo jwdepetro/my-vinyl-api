@@ -21,7 +21,7 @@ module V1
 
         # PUT /records/:id/tracks/:id
         def update
-            @track.update(track_params)
+            @track.update!(track_params)
             head :no_content
         end
 

@@ -93,7 +93,7 @@ RSpec.describe 'Tracks API' do
             end
 
             it 'returns a validation error message' do 
-                expect(response.body).to match(/Validation failed: Name can't be blank/)
+                expect(response.body).to match(/Validation failed: Number is not a number, Number can't be blank, Duration is not a number, Duration can't be blank, Name can't be blank/)
             end
         end
     end
