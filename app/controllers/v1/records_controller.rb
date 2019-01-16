@@ -21,7 +21,7 @@ module V1
 
         # PUT /records/:id
         def update 
-            @record.update!(record_params)
+            @record.update(record_params)
             head :no_content
         end
 
